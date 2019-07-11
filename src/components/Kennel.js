@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import EmployeeList from "./employee/EmployeeList"
+import LocationList from "./location/LocationList"
 
 export default class Kennel extends Component {
   employeesFromAPI = [
@@ -23,15 +24,7 @@ export default class Kennel extends Component {
   render() {
     return (
       <div>
-        {
-        this.state.locations.map( location =>
-          <div key={location.id}>
-            <h3>Student Kennels</h3>
-            <h4>{location.name}</h4>
-            <h5>{location.address}</h5>
-          </div>
-        )
-        }
+        <LocationList locations={this.state.locations} />
         {/* employees={this.state.employees} is the data that is being passed down to the EmployeeList
           employees becomes a key of props and the value is this.state.employees. */}
         <EmployeeList employees={this.state.employees} />
