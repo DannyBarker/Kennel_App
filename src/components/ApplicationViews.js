@@ -53,6 +53,11 @@ export default class ApplicationViews extends Component {
     employees: data
   })
  }
+ deleteOwner = (data) => {
+  this.setState({
+    owners: data
+  })
+ }
 
 
   render() {
@@ -68,7 +73,7 @@ export default class ApplicationViews extends Component {
           return <EmployeeList employees={this.state.employees} deleteObj={this.deleteObj} deleteEmployee={this.deleteEmployee} />
         }} />
         <Route path="/owners" render={(props) => {
-          return <OwnersList owners={this.state.owners} />
+          return <OwnersList owners={this.state.owners} deleteObj={this.deleteObj} deleteOwner={this.deleteOwner} />
         }} />
         <Route path="/search" render={(props) => {
           return <SearchList results={this.props.results} />
