@@ -6,6 +6,7 @@ import EmployeeList from './employee/EmployeeList'
 import OwnersList from './owners/OwnersList'
 import SearchList from './search/SearchList'
 import AnimalManager from '../modules/AnimalManager'
+import AnimalDetail from './animals/AnimalDetail'
 
  class ApplicationViews extends Component {
   state = {
@@ -62,8 +63,19 @@ import AnimalManager from '../modules/AnimalManager'
         <Route exact path="/" render={(props) => {
           return <LocationList locations={this.state.locations} />
         }} />
-        <Route path="/animals" render={(props) => {
+        <Route exact path="/animals" render={(props) => {
           return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteObj={this.deleteObj} deleteAnimal={this.deleteAnimal} />
+        }} />
+        <Route path="/animals/:animalId(\d+)" render={(props) => {
+        // Find the animal with the id of the route parameter
+          let animal = this.state.animals.find(animal =>
+          animal.id === +props.match.params.animalId
+          )
+          // If the animal wasn't found, create a default one
+          if (!animal) {
+              animal = {id:404, name:"404", breed: "Dog not found"}
+          }
+          return <AnimalDetail {...props} animal={ animal } deleteObj={this.deleteObj} deleteAnimal={this.deleteAnimal} />
         }} />
         <Route path="/employees" render={(props) => {
           return <EmployeeList employees={this.state.employees} deleteObj={this.deleteObj} deleteEmployee={this.deleteEmployee} />

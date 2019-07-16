@@ -65,26 +65,31 @@
     {
       "id": 1,
       "name": "Doodles",
+      "breed": "German Shephard",
       "ownerId": 6
     },
     {
       "id": 3,
       "name": "Angus",
+      "breed": "Boxer",
       "ownerId": 4
     },
     {
       "id": 4,
       "name": "Henley",
+      "breed": "Poodle",
       "ownerId": 3
     },
     {
       "id": 5,
       "name": "Derkins",
+      "breed": "American Bully",
       "ownerId": 2
     },
     {
       "id": 6,
       "name": "Checkers",
+      "breed": "Mountain",
       "ownerId": 1
     }
   ]
