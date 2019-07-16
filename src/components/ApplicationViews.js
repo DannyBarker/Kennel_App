@@ -20,11 +20,11 @@ import AnimalManager from '../modules/AnimalManager'
 
     AnimalManager.getAll("animals")
       .then(animals => newState.animals = animals)
-      .then(AnimalManager.getAll("employees"))
+      .then(() => AnimalManager.getAll("employees"))
       .then(employees => newState.employees = employees)
-      .then(AnimalManager.getAll("locations"))
+      .then(() => AnimalManager.getAll("locations"))
       .then(locations => newState.locations = locations)
-      .then(AnimalManager.getAll("owners"))
+      .then(() => AnimalManager.getAll("owners"))
       .then(owners => newState.owners = owners)
       .then(() => this.setState(newState))
   }
