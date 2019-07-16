@@ -7,9 +7,10 @@ export default class EmployeeList extends Component {
         <ul>
           <h3>Employees</h3>
           {
-            this.props.employees.map( animal =>
-              <li key={animal.id}>
-                <h4>{animal.name}</h4>
+            this.props.employees.map( employee =>
+              <li key={employee.id}>
+                <h4>{employee.name}</h4>
+                <button onClick={() => this.props.deleteObj("employees", employee.id, this.props.deleteEmployee)} className="card-link">Delete</button>
               </li>
             )
           }

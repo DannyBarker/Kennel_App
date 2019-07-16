@@ -32,7 +32,7 @@ export default class ApplicationViews extends Component {
       .then(() => this.setState(newState))
   }
 
-  deleteAnimal = (entity, id) => {
+  deleteObj = (entity, id, fnctn) => {
     return fetch(`http://localhost:5002/${entity}/${id}`, {
         method: "DELETE"
       })
@@ -40,11 +40,19 @@ export default class ApplicationViews extends Component {
       .then(() => fetch(`http://localhost:5002/${entity}`))
       .then(e => e.json())
       .then(data => {
-        this.setState({
-        animals: data
-      })
+        fnctn(data)
   })
 }
+ deleteAnimal = (data) => {
+  this.setState({
+    animals: data
+  })
+ }
+ deleteEmployee = (data) => {
+  this.setState({
+    employees: data
+  })
+ }
 
 
   render() {
@@ -54,10 +62,10 @@ export default class ApplicationViews extends Component {
           return <LocationList locations={this.state.locations} />
         }} />
         <Route path="/animals" render={(props) => {
-          return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteAnimal={this.deleteAnimal} />
+          return <AnimalList animals={this.state.animals} owners={this.state.owners} deleteObj={this.deleteObj} deleteAnimal={this.deleteAnimal} />
         }} />
         <Route path="/employees" render={(props) => {
-          return <EmployeeList employees={this.state.employees} />
+          return <EmployeeList employees={this.state.employees} deleteObj={this.deleteObj} deleteEmployee={this.deleteEmployee} />
         }} />
         <Route path="/owners" render={(props) => {
           return <OwnersList owners={this.state.owners} />

@@ -19,7 +19,7 @@ export default class AnimalList extends Component {
                   this.props.owners.map( owner => owner.id === animal.ownerId ? <li key={owner.id}>{owner.name}</li> : "")
                 }
                 </ul>
-                <button onClick={() => this.props.deleteAnimal("animals", animal.id)} className="card-link">
+                <button onClick={() => this.props.deleteObj("animals", animal.id, this.props.deleteAnimal)} className="card-link">
                   Delete
                 </button>
               </div>
