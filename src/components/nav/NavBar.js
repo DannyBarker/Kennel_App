@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 
 export default class NavBar extends Component {
+
   render() {
     return (
       <nav className="navbar navbar-light light-blue flex-md-nowrap p-0 shadow">
@@ -19,6 +20,9 @@ export default class NavBar extends Component {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/owners">Owners</Link>
+          </li>
+          <li className="nav-item">
+            <input type="text" placeholder="Search" className="search form-control" onKeyPress={this.props.inputEvent} ></input>
           </li>
         </ul>
       </nav>

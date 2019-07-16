@@ -4,7 +4,8 @@ import AnimalList from './animals/AnimalList'
 import LocationList from './location/LocationList'
 import EmployeeList from './employee/EmployeeList'
 import OwnersList from './owners/OwnersList'
-
+import SearchList from './search/SearchList'
+import AnimalManager from '../modules/AnimalManager'
 
 export default class ApplicationViews extends Component {
   state = {
@@ -17,8 +18,7 @@ export default class ApplicationViews extends Component {
   componentDidMount() {
     const newState = {}
 
-    fetch ("http://localhost:5002/animals")
-      .then(r => r.json())
+    AnimalManager.getAll()
       .then(animals => newState.animals = animals)
       .then(() => fetch("http://localhost:5002/employees")
       .then(r => r.json()))
@@ -32,18 +32,20 @@ export default class ApplicationViews extends Component {
       .then(() => this.setState(newState))
   }
 
-  deleteAnimal = id => {
-    return fetch(`http://localhost:5002/animals/${id}`, {
+  deleteAnimal = (entity, id) => {
+    return fetch(`http://localhost:5002/${entity}/${id}`, {
         method: "DELETE"
       })
       .then(e => e.json())
-      .then(() => fetch(`http://localhost:5002/animals`))
+      .then(() => fetch(`http://localhost:5002/${entity}`))
       .then(e => e.json())
-      .then(animals => this.setState({
-        animals: animals
+      .then(data => {
+        this.setState({
+        animals: data
       })
-    )
+  })
 }
+
 
   render() {
     return (
@@ -59,6 +61,9 @@ export default class ApplicationViews extends Component {
         }} />
         <Route path="/owners" render={(props) => {
           return <OwnersList owners={this.state.owners} />
+        }} />
+        <Route path="/search" render={(props) => {
+          return <SearchList results={this.props.results} />
         }} />
       </React.Fragment>
     )

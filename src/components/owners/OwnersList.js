@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class OwnersList extends Component {
   render() {
     return (
-      <section name="owners">
+      <section name="owners" >
         <h3>Owners</h3>
         <ul>
           {
