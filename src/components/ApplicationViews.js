@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import React, { Component } from "react"
 import AnimalList from './animals/AnimalList'
 import LocationList from './location/LocationList'
@@ -7,7 +7,7 @@ import OwnersList from './owners/OwnersList'
 import SearchList from './search/SearchList'
 import AnimalManager from '../modules/AnimalManager'
 
-export default class ApplicationViews extends Component {
+ class ApplicationViews extends Component {
   state = {
     owners: [],
     employees: [],
@@ -18,42 +18,38 @@ export default class ApplicationViews extends Component {
   componentDidMount() {
     const newState = {}
 
-    AnimalManager.getAll()
+    AnimalManager.getAll("animals")
       .then(animals => newState.animals = animals)
-      .then(() => fetch("http://localhost:5002/employees")
-      .then(r => r.json()))
+      .then(AnimalManager.getAll("employees"))
       .then(employees => newState.employees = employees)
-      .then(() => fetch("http://localhost:5002/locations")
-      .then(r => r.json()))
+      .then(AnimalManager.getAll("locations"))
       .then(locations => newState.locations = locations)
-      .then(() => fetch("http://localhost:5002/owners")
-      .then(r => r.json()))
+      .then(AnimalManager.getAll("owners"))
       .then(owners => newState.owners = owners)
       .then(() => this.setState(newState))
   }
 
   deleteObj = (entity, id, fnctn) => {
-    return fetch(`http://localhost:5002/${entity}/${id}`, {
-        method: "DELETE"
-      })
-      .then(e => e.json())
-      .then(() => fetch(`http://localhost:5002/${entity}`))
-      .then(e => e.json())
+    AnimalManager.delete(entity, id)
+      .then(() => AnimalManager.getAll(entity))
       .then(data => {
         fnctn(data)
   })
 }
- deleteAnimal = (data) => {
+ deleteAnimal = data => {
+  this.props.history.push("/animals")
   this.setState({
     animals: data
   })
  }
- deleteEmployee = (data) => {
+ deleteEmployee = data => {
+  this.props.history.push("/employees")
   this.setState({
     employees: data
   })
  }
- deleteOwner = (data) => {
+ deleteOwner = data => {
+  this.props.history.push("/owners")
   this.setState({
     owners: data
   })
@@ -82,3 +78,4 @@ export default class ApplicationViews extends Component {
     )
   }
 }
+export default withRouter(ApplicationViews)
