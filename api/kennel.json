@@ -34,19 +34,23 @@
   "employees": [
     {
       "id": 1,
-      "name": "Jessica Younker"
+      "name": "Jessica Younker",
+      "phoneNumber": "(000) 123-4567"
     },
     {
       "id": 2,
-      "name": "Jordan Nelson"
+      "name": "Jordan Nelson",
+      "phoneNumber": "(000) 123-4567"
     },
     {
       "id": 3,
-      "name": "Zoe LeBlanc"
+      "name": "Zoe LeBlanc",
+      "phoneNumber": "(000) 123-4567"
     },
     {
       "id": 4,
-      "name": "Blaise Roberts"
+      "name": "Blaise Roberts",
+      "phoneNumber": "(000) 123-4567"
     }
   ],
   "locations": [

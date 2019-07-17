@@ -7,6 +7,8 @@ import OwnersList from './owners/OwnersList'
 import SearchList from './search/SearchList'
 import AnimalManager from '../modules/AnimalManager'
 import AnimalDetail from './animals/AnimalDetail'
+import EmployeeDetail from './employee/EmployeeDetail'
+import OwnerDetail from './owners/OwnerDetail'
 
  class ApplicationViews extends Component {
   state = {
@@ -73,15 +75,29 @@ import AnimalDetail from './animals/AnimalDetail'
           )
           // If the animal wasn't found, create a default one
           if (!animal) {
-              animal = {id:404, name:"404", breed: "Dog not found"}
+            animal = {id:404, name:"404", breed: "Dog not found"}
           }
           return <AnimalDetail {...props} animal={ animal } deleteObj={this.deleteObj} deleteAnimal={this.deleteAnimal} />
         }} />
-        <Route path="/employees" render={(props) => {
+        <Route exact path="/employees" render={(props) => {
           return <EmployeeList employees={this.state.employees} deleteObj={this.deleteObj} deleteEmployee={this.deleteEmployee} />
         }} />
-        <Route path="/owners" render={(props) => {
+        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+          let employee = this.state.employees.find(employee => employee.id === +props.match.params.employeeId)
+          if (!employee) {
+            employee = {id:404, name:"Employee Not Found", phoneNumber:"404"}
+          }
+          return <EmployeeDetail {...props} employee={employee} deleteObj={this.deleteObj} deleteEmployee={this.deleteEmployee} />
+        }} />
+        <Route exact path="/owners" render={(props) => {
           return <OwnersList owners={this.state.owners} deleteObj={this.deleteObj} deleteOwner={this.deleteOwner} />
+        }} />
+        <Route path="/owners/:ownerId(\d+)" render={(props) => {
+          let owner = this.state.owners.find(owner => owner.id === +props.match.params.ownerId)
+          if (!owner) {
+            owner = {id:404, name:"Owner Not Found", phoneNumber: "404"}
+          }
+          return <OwnerDetail owner={owner} deleteObj={this.deleteObj} deleteOwner={this.deleteOwner} />
         }} />
         <Route path="/search" render={(props) => {
           return <SearchList results={this.props.results} />
