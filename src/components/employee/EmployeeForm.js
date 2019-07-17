@@ -25,8 +25,14 @@ export default class EmployeeForm extends Component {
     return (
       <React.Fragment>
         <form>
-          <input type="text" id="employeeName" required onChange={this.handleFieldChange} placeholder="Name" />
-          <input type="text" id="employeeNumber" required onChange={this.handleFieldChange} placeholder="Phone ex.(123) 456-7890" />
+          <fieldset>
+            <legend>Employee Name</legend>
+            <input type="text" id="employeeName" className="form-control" required onChange={this.handleFieldChange} placeholder="Name" />
+          </fieldset>
+          <fieldset>
+            <legend>Employeed Phone Number</legend>
+            <input type="text" id="employeeNumber" className="form-control" required onChange={this.handleFieldChange} placeholder="(123) 456-7890" />
+          </fieldset>
           <button type="submit" onClick={this.constructNewEmp}>Submit</button>
         </form>
       </React.Fragment>

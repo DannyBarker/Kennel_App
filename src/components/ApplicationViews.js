@@ -1,4 +1,4 @@
-import { Route, withRouter } from 'react-router-dom'
+import { Route, withRouter, Redirect } from 'react-router-dom'
 import React, { Component } from "react"
 import AnimalList from './animals/AnimalList'
 import LocationList from './location/LocationList'
@@ -11,6 +11,7 @@ import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
 import AnimalForm from './animals/AnimalForm'
 import EmployeeForm from './employee/EmployeeForm'
+import Login from './authentication/Login'
 
  class ApplicationViews extends Component {
   state = {
@@ -69,10 +70,12 @@ import EmployeeForm from './employee/EmployeeForm'
   })
  }
 
+ isAuthenticated = () => sessionStorage.getItem("credentials") !== null;
 
   render() {
     return (
       <React.Fragment>
+        <Route path="/login" component={Login} />
         <Route exact path="/" render={(props) => {
           return <LocationList locations={this.state.locations} />
         }} />
@@ -94,7 +97,11 @@ import EmployeeForm from './employee/EmployeeForm'
           return <AnimalDetail {...props} animal={ animal } deleteObj={this.deleteObj} updateAnimal={this.updateAnimal} />
         }} />
         <Route exact path="/employees" render={(props) => {
+          if (this.isAuthenticated()) {
           return <EmployeeList {...props} employees={this.state.employees} deleteObj={this.deleteObj} updateEmployee={this.updateEmployee} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route exact path="/employees/new" render={(props) => {
           return <EmployeeForm addObj={this.addObj} updateEmployee={this.updateEmployee} />
