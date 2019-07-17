@@ -10,7 +10,7 @@ export default class Employee extends Component {
         <h3>{this.props.employee.name}</h3>
         <p>{this.props.employee.phoneNumber}</p>
         <button onClick={() => {
-          this.props.deleteObj("employees", this.props.employee.id, this.props.deleteEmployee)
+          this.props.deleteObj("employees", this.props.employee.id, this.props.updateEmployee)
           this.setState({saveDisabled: true})
         }} disabled={this.state.saveDisabled}>Delete</button>
       </div>

@@ -70,31 +70,49 @@
       "id": 1,
       "name": "Doodles",
       "breed": "German Shephard",
+      "employeeId": 4,
       "ownerId": 6
     },
     {
       "id": 3,
       "name": "Angus",
       "breed": "Boxer",
+      "employeeId": 1,
       "ownerId": 4
     },
     {
       "id": 4,
       "name": "Henley",
       "breed": "Poodle",
+      "employeeId": 4,
       "ownerId": 3
     },
     {
       "id": 5,
       "name": "Derkins",
       "breed": "American Bully",
+      "employeeId": 2,
       "ownerId": 2
     },
     {
       "id": 6,
       "name": "Checkers",
       "breed": "Mountain",
+      "employeeId": 1,
       "ownerId": 1
+    },
+    {
+      "name": "Peach",
+      "breed": "Malty-Poo",
+      "employeeId": 3,
+      "id": 7
+    },
+    {
+      "name": "Isabow",
+      "breed": "Great Pyrenees",
+      "employeeId": 4,
+      "ownerId": 3,
+      "id": 8
     }
   ]
 }
