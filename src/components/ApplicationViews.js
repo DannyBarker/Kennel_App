@@ -10,6 +10,7 @@ import AnimalDetail from './animals/AnimalDetail'
 import EmployeeDetail from './employee/EmployeeDetail'
 import OwnerDetail from './owners/OwnerDetail'
 import AnimalForm from './animals/AnimalForm'
+import EmployeeForm from './employee/EmployeeForm'
 
  class ApplicationViews extends Component {
   state = {
@@ -93,9 +94,12 @@ import AnimalForm from './animals/AnimalForm'
           return <AnimalDetail {...props} animal={ animal } deleteObj={this.deleteObj} updateAnimal={this.updateAnimal} />
         }} />
         <Route exact path="/employees" render={(props) => {
-          return <EmployeeList employees={this.state.employees} deleteObj={this.deleteObj} updateEmployee={this.updateEmployee} />
+          return <EmployeeList {...props} employees={this.state.employees} deleteObj={this.deleteObj} updateEmployee={this.updateEmployee} />
         }} />
-        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+        <Route exact path="/employees/new" render={(props) => {
+          return <EmployeeForm addObj={this.addObj} updateEmployee={this.updateEmployee} />
+        }} />
+        <Route exact path="/employees/:employeeId(\d+)" render={(props) => {
           let employee = this.state.employees.find(employee => employee.id === +props.match.params.employeeId)
           if (!employee) {
             employee = {id:404, name:"Employee Not Found", phoneNumber:"404"}
