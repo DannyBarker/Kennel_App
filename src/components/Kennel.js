@@ -40,7 +40,7 @@ class Kennel extends Component {
     return (
       <React.Fragment>
         <NavBar inputEvent={this.inputEvent} />
-        <ApplicationViews results={this.state} />
+          <ApplicationViews results={this.state} />
       </React.Fragment>
     );
   }

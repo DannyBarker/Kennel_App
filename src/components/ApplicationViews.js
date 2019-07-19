@@ -75,6 +75,7 @@ import Login from './authentication/Login'
   render() {
     return (
       <React.Fragment>
+        
         <Route path="/login" component={Login} />
         <Route exact path="/" render={(props) => {
           return <LocationList locations={this.state.locations} />
